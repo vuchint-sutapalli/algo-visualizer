@@ -1,0 +1,35 @@
+.array-container {
+  display: flex;
+  width: 100%;
+  padding: 50px;
+  align-items: flex-end;
+}
+
+.array-container--item {
+  width: 10px;
+  min-width: 10px;
+  background-color: yellow;
+  margin: 0px 10px;
+  display: inline-block;
+  position: relative;
+}
+
+.array-container--item::before {
+  content: attr(data-index);
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  color: purple;
+}
+
+.picked {
+  background-color: red !important;
+}
+
+.array-container--item::after {
+  content: attr(data-value);
+  position: absolute;
+  left: 0;
+  top: -50px;
+  color: purple;
+}
