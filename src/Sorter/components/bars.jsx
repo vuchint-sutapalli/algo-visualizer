@@ -17,7 +17,8 @@ const bars = ({ rects, leftPointer, rightPointer }) => {
                     leftPointer={leftPointer}
                     rightPointer={rightPointer}
                     index={index}
-                    height={item.height}
+                    barData={item}
+                    // height={item.height}
                   ></BarItem>
                 );
               }}

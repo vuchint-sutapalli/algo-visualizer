@@ -10,6 +10,7 @@ const Sorter = ({ count = 10 }) => {
   const [original, setOriginal] = useState([]);
   const [leftPointer, setLeftPointer] = useState(null);
   const [rightPointer, setRightPointer] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const resetArray = () => {
     let barObjects = [];
@@ -39,6 +40,7 @@ const Sorter = ({ count = 10 }) => {
     <>
       <div style={{ height: "200px" }}>
         {original.map((o) => o.height).toString()}
+
         <div>
           {leftPointer !== null && rightPointer !== null ? (
             <span>{`merge sorting subarray betwwen ${leftPointer}, ${rightPointer}`}</span>
@@ -58,6 +60,8 @@ const Sorter = ({ count = 10 }) => {
         setArrayItems={setArrayItems}
         setLeftPointer={setLeftPointer}
         setRightPointer={setRightPointer}
+        isAnimating={isAnimating}
+        setIsAnimating={setIsAnimating}
       />
     </>
   );

@@ -2,20 +2,20 @@ import React from "react";
 
 const BarItem = ({
   flippedProps,
-  height,
+  barData,
   leftPointer,
   rightPointer,
   index,
 }) => {
-  //   const checkColor = () => {
-  //     if (rect.isSorted) {
-  //       return "green";
-  //     } else if (rect.isSorting) {
-  //       return "red";
-  //     } else {
-  //       return "yellow";
-  //     }
-  //   };
+  const checkColor = () => {
+    if (barData.isSorted) {
+      return "green";
+    } else if (barData.isSorting) {
+      return "red";
+    } else {
+      return "yellow";
+    }
+  };
   //   return (
   //     <div
   //       className="rect"
@@ -37,9 +37,9 @@ const BarItem = ({
           ? "picked"
           : null
       }`}
-      style={{ height: `${height}px` }}
+      style={{ height: `${barData.height}px`, background: checkColor() }}
       data-index={index}
-      data-value={height}
+      data-value={barData.height}
       key={index}
     ></div>
   );
