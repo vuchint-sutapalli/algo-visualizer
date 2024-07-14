@@ -2,25 +2,30 @@ import "./index.css";
 import React, { useEffect, useState } from "react";
 
 import SortingController from "../SortingController";
-
+import Bars from "./components/bars";
 import { generateRandom, mergeSort } from "../helpers";
 
-const Sorter = () => {
+const Sorter = ({ count = 10 }) => {
   const [arrayItems, setArrayItems] = useState([]);
   const [original, setOriginal] = useState([]);
   const [leftPointer, setLeftPointer] = useState(null);
   const [rightPointer, setRightPointer] = useState(null);
 
   const resetArray = () => {
-    console.log("resetttttttttttttttttttttttttttt");
-    let tempArray = [];
-    //allow duplicate values
-    for (let i = 0; i < 10; i++) {
-      tempArray.push(generateRandom(5, 500));
+    let barObjects = [];
+    for (let i = 0; i < count; i++) {
+      barObjects.push(getBarObj(i));
     }
-
-    setArrayItems([...tempArray]);
-    setOriginal([...tempArray]);
+    setArrayItems([...barObjects]);
+    setOriginal([...barObjects]);
+  };
+  const getBarObj = (keyIndex) => {
+    return {
+      height: generateRandom(5, 500),
+      isSorted: false,
+      isSorting: false,
+      keyIndex: keyIndex,
+    };
   };
 
   useEffect(() => {
@@ -33,7 +38,7 @@ const Sorter = () => {
   return (
     <>
       <div style={{ height: "200px" }}>
-        {original.toString()}
+        {original.map((o) => o.height).toString()}
         <div>
           {leftPointer !== null && rightPointer !== null ? (
             <span>{`merge sorting subarray betwwen ${leftPointer}, ${rightPointer}`}</span>
@@ -41,28 +46,12 @@ const Sorter = () => {
         </div>
       </div>
 
-      <div className="array-container">
-        {arrayItems.map((item, index) => {
-          return (
-            <div
-              className={`array-container--item ${
-                leftPointer !== null &&
-                rightPointer !== null &&
-                leftPointer <= index &&
-                index <= rightPointer
-                  ? "picked"
-                  : null
-              }`}
-              style={{ height: `${item}px` }}
-              data-index={index}
-              data-value={item}
-              key={index}
-            >
-              {/* {item} */}
-            </div>
-          );
-        })}
-      </div>
+      <Bars
+        rects={arrayItems}
+        leftPointer={leftPointer}
+        rightPointer={rightPointer}
+      />
+
       <button onClick={resetArray}>Generate New Array</button>
       <SortingController
         arrayItems={arrayItems}
