@@ -1,4 +1,5 @@
-const sort = (arr) => {
+const sort = (unsortedArray) => {
+  let arr = [...unsortedArray];
   let steps = [];
 
   const mergeSortInPlace = (arr, start, end) => {
@@ -7,7 +8,7 @@ const sort = (arr) => {
       mergeSortInPlace(arr, start, mid);
       mergeSortInPlace(arr, mid + 1, end);
       mergeInPlace(arr, start, mid, end);
-      console.log(`merged betweer ${start}, ${end}`, arr);
+      console.log(`merged between ${start}, ${end}`, arr);
       steps.push({
         left: start,
         right: end,
@@ -48,7 +49,7 @@ const mergeInPlace = (arr, start, mid, end) => {
   let k = start; // Initial index of merged subarray
 
   while (i < leftLength && j < rightLength) {
-    if (leftArr[i] <= rightArr[j]) {
+    if (leftArr[i].height <= rightArr[j].height) {
       arr[k] = leftArr[i];
       i++;
     } else {
